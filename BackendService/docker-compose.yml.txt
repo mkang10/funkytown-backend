@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: backend-service
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile
+    ports:
+      - "8080:8080"  # bạn có thể chỉnh cổng theo nhu cầu
+    environment:
+      - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+    depends_on:
+      - sqlserver
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: ftown-sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: your_password
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sqlvolume:/var/opt/mssql
+
+volumes:
+  sqlvolume:

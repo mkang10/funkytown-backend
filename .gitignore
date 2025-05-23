@@ -1,0 +1,10 @@
+appsettings.Development.json
+
+.idea/
+
+bin/
+
+.vs/
+
+obj/
+/AdminService/Infrastructure/FtownContext.cs
